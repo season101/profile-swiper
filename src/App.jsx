@@ -2,9 +2,9 @@ import Carousel from './Carousel';
 
 const App = () => {
   return (
-    <main>
+    <section className="section">
       <Carousel />
-    </main>
+    </section>
   );
 };
 export default App;

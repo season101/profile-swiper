@@ -9,16 +9,12 @@ const Carousel = () => {
   const nextSlide = () => {};
 
   return (
-    <section>
+    <section className="slider-container">
       {profiles.map(({ id, image, name, quote, title }) => {
         return (
           <article className="slide" key={id}>
-            <img
-              src={image}
-              alt={name}
-              style={{ width: '150px', borderRadius: '50%' }}
-            />
-            <h5>{name}</h5>
+            <img src={image} alt={name} className="person-img" />
+            <h5 className="name">{name}</h5>
             <p className="title">{title}</p>
             <p className="text">{quote}</p>
             <FaQuoteRight className="icon" />
