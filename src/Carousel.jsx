@@ -1,18 +1,35 @@
 import React, { useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa';
-import { shortList } from './data';
+import { longList } from './data';
 
 const Carousel = () => {
-  const [profiles, setProfiles] = useState(shortList);
+  const [profiles, setProfiles] = useState(longList);
+  const [currentProfile, setCurrentProfile] = useState(1);
 
-  const prevSlide = () => {};
-  const nextSlide = () => {};
+  const prevSlide = () => {
+    setCurrentProfile(() => {
+      return (currentProfile - 1 + profiles.length) % profiles.length;
+    });
+  };
+  const nextSlide = () => {
+    setCurrentProfile(() => {
+      return (currentProfile + 1) % profiles.length;
+    });
+  };
 
   return (
     <section className="slider-container">
-      {profiles.map(({ id, image, name, quote, title }) => {
+      {profiles.map(({ id, image, name, quote, title }, index) => {
         return (
-          <article className="slide" key={id}>
+          <article
+            className="slide"
+            style={{
+              transform: `translateX(${100 * (index - currentProfile)}%)`,
+              opacity: index === currentProfile ? 1 : 0,
+              visibility: index === currentProfile ? 'visible' : 'invisible',
+            }}
+            key={id}
+          >
             <img src={image} alt={name} className="person-img" />
             <h5 className="name">{name}</h5>
             <p className="title">{title}</p>
