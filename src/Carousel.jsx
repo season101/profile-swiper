@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa';
 import { longList } from './data';
 
@@ -7,15 +7,24 @@ const Carousel = () => {
   const [currentProfile, setCurrentProfile] = useState(1);
 
   const prevSlide = () => {
-    setCurrentProfile(() => {
-      return (currentProfile - 1 + profiles.length) % profiles.length;
+    setCurrentProfile((oldProfile) => {
+      return (oldProfile - 1 + profiles.length) % profiles.length;
     });
   };
   const nextSlide = () => {
-    setCurrentProfile(() => {
-      return (currentProfile + 1) % profiles.length;
+    setCurrentProfile((oldProfile) => {
+      return (oldProfile + 1) % profiles.length;
     });
   };
+
+  useEffect(() => {
+    let slideId = setInterval(() => {
+      nextSlide();
+    }, 2000);
+    return () => {
+      clearInterval(slideId);
+    };
+  }, [currentProfile]);
 
   return (
     <section className="slider-container">
