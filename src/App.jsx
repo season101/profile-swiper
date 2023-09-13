@@ -1,10 +1,11 @@
-import Carousel from './Carousel';
-
+import SlickCarousel from './SlickCarousel';
 const App = () => {
   return (
     <section className="section">
-      <Carousel />
+      {/* <Carousel /> */}
+      <SlickCarousel />
     </section>
   );
 };
+
 export default App;
